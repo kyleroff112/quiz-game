@@ -26,15 +26,24 @@ var questions = [
   },
 ];
 
-console.log("Hello World");
+var intervalId;
+var index = 0;
+var score = 0;
+// Set the number of seconds for the timer
+var seconds = 60;
+
+// Display the starting time on the page
+document.getElementById("timer").innerHTML = seconds + " seconds remaining";
 
 var startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", function (event) {
+  document.getElementById('scoreSection').style.display = '';
+  document.getElementById('start-button').style.display = 'none';
   event.preventDefault();
   document.getElementById('question-section').style.display = 'block';
   nextQuestion();
   // var intervalId = setInterval(decrementTime, 1000);
-  var intervalId = setInterval(function () {
+    intervalId = setInterval(function () {
     seconds--;
     document.getElementById("timer").innerHTML = seconds + " seconds remaining";
     if (seconds === 0) {
@@ -45,14 +54,7 @@ startButton.addEventListener("click", function (event) {
   }, 1000);
 });
 
-var index = 0;
-var score = 0;
 
-// Set the number of seconds for the timer
-var seconds = 60;
-
-// Display the starting time on the page
-document.getElementById("timer").innerHTML = seconds + " seconds remaining";
 
 
 function nextQuestion() {
@@ -88,8 +90,30 @@ function nextQuestion() {
 
 
 function endGame(event) {
+  clearInterval(intervalId);
   console.log("Game over!");
   var initials = window.prompt("Enter your initials to save your score.");
   window.alert(initials + "! Your score is " + score + " out of " + questions.length + ".");
-  document.getElementById("previousScores").innerHTML = initials + " - " + score + " out of " + questions.length;
+  var createElement = document.createElement("li");
+  createElement.textContent = initials + " - " + score;
+  document.getElementById("previousScores").style.display = '';
+  document.getElementById("previousScores").insertBefore(createElement, document.getElementById("previousScores").firstChild);
+  document.getElementById('scoreSection').style.display = 'none';
+  document.getElementById('restart-button').style.display = '';
+  document.getElementById('question-section').style.display = 'none';
+  var restartButton = document.querySelector("#restart-button");
+restartButton.addEventListener("click", function (event) {
+  document.getElementById('restart-button').style.display = 'none';
+  document.getElementById('start-button').style.display = '';
+  event.preventDefault();
+  score = 0;
+  index = 0;
+  seconds = 60;
+  document.getElementById("timer").innerHTML = seconds + " seconds remaining";
+});
+
 };
+
+
+
+
