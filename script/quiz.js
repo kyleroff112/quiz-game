@@ -96,6 +96,7 @@ function endGame(event) {
   window.alert(initials + "! Your score is " + score + " out of " + questions.length + ".");
   var createElement = document.createElement("li");
   createElement.textContent = initials + " - " + score;
+  document.getElementById("previousScoresHeader").style.display = '';
   document.getElementById("previousScores").style.display = '';
   document.getElementById("previousScores").insertBefore(createElement, document.getElementById("previousScores").firstChild);
   document.getElementById('scoreSection').style.display = 'none';
