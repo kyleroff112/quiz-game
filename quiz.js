@@ -93,4 +93,3 @@ function endGame(event) {
   window.alert(initials + "! Your score is " + score + " out of " + questions.length + ".");
   document.getElementById("previousScores").innerHTML = initials + " - " + score + " out of " + questions.length;
 };
-
