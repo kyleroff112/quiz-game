@@ -1,26 +1,26 @@
 var questions = [
   {
-    question: "Who created JavaScript?",
+    question: "1. Who created JavaScript?",
     choices: ["Douglas Crockford", "Sheryl Sandberg", "Brendan Eich", "Bill Gates"],
     answer: "Brendan Eich"
   },
   {
-    question: "When was JavaScript created?",
+    question: "2. When was JavaScript created?",
     choices: ["1995", "1996", "1994", "none of the above"],
     answer: "1995"
   },
   {
-    question: "Which one of these is a JavaScript package manager?",
+    question: "3. Which one of these is a JavaScript package manager?",
     choices: ["Node.js", "TypeScript", "npm", "All of the above"],
     answer: "npm"
   },
   {
-    question: "Which tool can you use to ensure code quality?",
+    question: "4. Which tool can you use to ensure code quality?",
     choices: ["Angular", "jQuery", "RequireJS", "ESLint"],
     answer: "ESLint"
   },
   {
-    question: "Which of the following is not a JavaScript framework?",
+    question: "5. Which of the following is not a JavaScript framework?",
     choices: ["Angular", "React", "Vue", "jQuery"],
     answer: "jQuery"
   },
@@ -37,9 +37,9 @@ document.getElementById("timer").innerHTML = seconds + " seconds remaining";
 
 var startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", function (event) {
-  document.getElementById('scoreSection').style.display = '';
-  document.getElementById('start-button').style.display = 'none';
   event.preventDefault();
+  document.getElementById('start-button').style.display = 'none';
+  document.getElementById('scoreSection').style.display = '';  
   document.getElementById('question-section').style.display = 'block';
   nextQuestion();
   // var intervalId = setInterval(decrementTime, 1000);
@@ -93,10 +93,12 @@ function endGame(event) {
   clearInterval(intervalId);
   console.log("Game over!");
   var initials = window.prompt("Enter your initials to save your score.");
+  initials = initials.substring(0, 2);
   window.alert(initials + "! Your score is " + score + " out of " + questions.length + ".");
   var createElement = document.createElement("li");
-  createElement.textContent = initials + " - " + score;
+  createElement.textContent = initials.toUpperCase() + " - " + score + " out of " + questions.length + " with " + seconds + " seconds remaining";
   document.getElementById("previousScoresHeader").style.display = '';
+  document.getElementById("scoreSection").style.display = 'none';
   document.getElementById("previousScores").style.display = '';
   document.getElementById("previousScores").insertBefore(createElement, document.getElementById("previousScores").firstChild);
   document.getElementById('scoreSection').style.display = 'none';
